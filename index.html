@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <!-- 
+ -->
+  
+  <title>Carlos</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Here is the start !">
+<meta name="keywords" content="fe, ">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Carlos">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;index.html">
+<meta property="og:site_name" content="Carlos">
+<meta property="og:description" content="Here is the start !">
+<meta property="og:locale" content="en">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Carlos" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Carlos</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">my little blog</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="[layout]-前端面试笔试题分享" class="article article-type-[layout]" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/11/06/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AF%95%E9%A2%98%E5%88%86%E4%BA%AB/" class="article-date">
+  <time datetime="2019-11-06T18:01:40.000Z" itemprop="datePublished">2019-11-06</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/06/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AF%95%E9%A2%98%E5%88%86%E4%BA%AB/">前端面试笔试题分享</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>2019年9月中旬，决定从之前的公司离职。恰逢家里有些事情，我在十月上旬的末尾重新回到上海，并与中旬开始投递简历。感觉不同于以前，不需要怎么复习就能拿 Offer，我开始去面试的时候，大多时候面壁。在这期间，想想还是写点 blog, 记录下来这次特殊的求职经历，并以此共勉。</p>
+<h3 id="知名公司及笔试题分析"><a href="#知名公司及笔试题分析" class="headerlink" title="知名公司及笔试题分析"></a>知名公司及笔试题分析</h3><p>笔试题其实对面试者来说，并不友好。实际开发时，开发者一般都有熟悉的ide，代码补全等工具进行辅助。当转移到了纸上，应聘者不仅需要牢记这些 api，留空白行的手感也完全不同。没有好好准备的话，不经浪费了大量的时间，而且还很容易被刷掉。因此，有换工作的同学，请务必提前3个月刷下题目，并练习下手写代码。</p>
+<ol>
+<li>百度众测<br>百度旗下的平台。稍微有点坑，对算法要求比较高。吐槽下，在JD里添加下重点考察算法如何。  </li>
+</ol>
+<p>1.1 实现排序  </p>
+<pre><code class="javascript">function isArray(arr) {
+  return Object.prototype.toString.call(arr) === &#39;[object Array]&#39;;
+}
+function sort(arr) {
+  if (!isArray(arr)){
+    return [];
+  }
+  if (arr.length &lt; 2) {
+    return [];
+  }
+  var length = arr.length;
+  var temp = [arr[0]];
+  for (var i = 1; i &lt; length; i++) {
+    var tlen = temp.length;
+    for(var j = 0; j &lt; tlen; j++) {
+      if(arr[i] &lt;= temp[0]) {
+        temp.unshift(arr[i]);
+        break;
+      }
+      if (arr[i] &gt;= temp[tlen - 1]) {
+        temp.push(arr[i]);
+        break;
+      }
+      if (arr[i] &gt;= temp[j] &amp;&amp; arr[i] &lt;= temp[j+1]){
+        temp.splice(j+1, 0, arr[i]);
+        break;
+      }
+    }
+  }
+  return temp;
+}
+var arr = [5,4,3,2,1,2,3,6];
+sort(arr); // (8) [1, 2, 2, 3, 3, 4, 5, 6]</code></pre>
+<p>1.2 查找长字符中重复字符最多的字符  </p>
+<pre><code class="javascript">function filter(string){
+  var acc = [];
+  var temp = string.split(&#39;&#39;).sort();
+  var length = string.length;
+  var bcc = [];
+  for (var i = 0; i &lt; length; i++) {
+    if (temp[i] !== bcc[0]) {
+      acc.push(bcc);
+      bcc = [];
+      bcc.push(temp[i]);
+    } else {
+      bcc.push(temp[i]);
+    }
+    continue;
+  }
+  // return acc;
+  console.log(acc); // [Array(0), Array(1), Array(5), Array(2), Array(6), Array(2)]
+  var accLen = acc.length;
+  var maxLen = 0;
+  var maxInd = 0;
+  for (var j = 0; j &lt; accLen; j++) {
+    if (acc[j].length &gt; maxLen) {
+      maxLen = acc[j].length;
+      maxInd = j;
+    }
+  }
+  return acc[maxInd];
+}
+var str = &#39;asjfsjfjsifjilsjflsjf&#39;;
+filter(str); // [&quot;j&quot;, &quot;j&quot;, &quot;j&quot;, &quot;j&quot;, &quot;j&quot;, &quot;j&quot;]</code></pre>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/11/06/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AF%95%E9%A2%98%E5%88%86%E4%BA%AB/" data-id="ck2n7kddx0000x1q4fmb447ok" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF%EF%BC%8C%E9%9D%A2%E8%AF%95%EF%BC%8C%E6%89%8B%E5%86%99%E4%BB%A3%E7%A0%81/" rel="tag">前端，面试，手写代码</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF%EF%BC%8C%E9%9D%A2%E8%AF%95%EF%BC%8C%E6%89%8B%E5%86%99%E4%BB%A3%E7%A0%81/" rel="tag">前端，面试，手写代码</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/%E5%89%8D%E7%AB%AF%EF%BC%8C%E9%9D%A2%E8%AF%95%EF%BC%8C%E6%89%8B%E5%86%99%E4%BB%A3%E7%A0%81/" style="font-size: 10px;">前端，面试，手写代码</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/11/06/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AF%95%E9%A2%98%E5%88%86%E4%BA%AB/">前端面试笔试题分享</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 Carlos<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
