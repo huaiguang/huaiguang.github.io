@@ -5,26 +5,31 @@
   <!-- 
  -->
   
-  <title>Carlos</title>
+  <title>Artemis</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="Here is the start !">
-<meta name="keywords" content="fe, ">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Carlos">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;index.html">
-<meta property="og:site_name" content="Carlos">
+<meta property="og:title" content="Artemis">
+<meta property="og:url" content="http://yoursite.com/index.html">
+<meta property="og:site_name" content="Artemis">
 <meta property="og:description" content="Here is the start !">
-<meta property="og:locale" content="en">
+<meta property="og:locale" content="en_US">
+<meta property="article:author" content="Carlos">
+<meta property="article:tag" content="fe, ">
 <meta name="twitter:card" content="summary">
   
-    <link rel="alternate" href="/atom.xml" title="Carlos" type="application/atom+xml">
+    <link rel="alternate" href="/atom.xml" title="Artemis" type="application/atom+xml">
   
   
     <link rel="icon" href="/favicon.png">
   
   
-  <link rel="stylesheet" href="/css/style.css">
-</head>
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 <body>
   <div id="container">
@@ -34,12 +39,8 @@
   <div id="header-outer" class="outer">
     <div id="header-title" class="inner">
       <h1 id="logo-wrap">
-        <a href="/" id="logo">Carlos</a>
+        <a href="/" id="logo">Artemis</a>
       </h1>
-      
-        <h2 id="subtitle-wrap">
-          <a href="/" id="subtitle">my little blog</a>
-        </h2>
       
     </div>
     <div id="header-inner" class="inner">
@@ -66,6 +67,56 @@
       <div class="outer">
         <section id="main">
   
+    <article id="[layout]-详解JS中的this" class="article article-type-[layout]" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/12/01/%E8%AF%A6%E8%A7%A3JS%E4%B8%AD%E7%9A%84this/" class="article-date">
+  <time datetime="2019-12-01T18:01:40.000Z" itemprop="datePublished">2019-12-01</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/01/%E8%AF%A6%E8%A7%A3JS%E4%B8%AD%E7%9A%84this/">JS要点解析-this</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>JS要点解析系列, 主要是为了弄清楚JS中一些常见但容易出错，不常见但有助于理解代码的要点。不定时更新，请多多见谅。</p>
+<h2 id="this"><a href="#this" class="headerlink" title="this"></a>this</h2><p>this是JS中绕不过的要点，方方面面都和其相关。在技术的变迁中，this的疑问也有各种各种的变化。下面就将按照不同的背景，讲述下this的指向问题。</p>
+<h2 id="在ES2015之前"><a href="#在ES2015之前" class="headerlink" title="在ES2015之前"></a>在ES2015之前</h2><p>在ES6之前, 最常用的包还是jQuery的时代. 主流的方式是通过构造函数，模拟面向对象来编写代码.<br>常见用法如下:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 不指定</span></span><br><span class="line"><span class="comment">// 严格模式下, this为undefined,</span></span><br><span class="line"><span class="comment">// &#x27;use strict&#x27;</span></span><br><span class="line"><span class="comment">// 非严格模式, 下为全局变量window</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">show</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">this</span>.a = <span class="string">&#x27;Hello world!&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line">show()</span><br><span class="line"></span><br><span class="line"><span class="comment">// 直接在元素上添加方法</span></span><br><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">&#x27;test&#x27;</span>).onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// this指向id为test的元素</span></span><br><span class="line">  <span class="built_in">this</span>.innerHTML = <span class="string">&#x27;Hello world!&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 构造函数+new</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Point</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// this指向当前创建的对象</span></span><br><span class="line">  <span class="built_in">this</span>.x = x</span><br><span class="line">  <span class="built_in">this</span>.y = y</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="在ES2015之后"><a href="#在ES2015之后" class="headerlink" title="在ES2015之后"></a>在ES2015之后</h2><p>ES6中引入了箭头函数(=&gt;), 增加了一种this的使用方法. 配合上Vue, React等框架，降低了前端开发的难度，使得前端可以更加的专注于业务.<br>常见的用法如下:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 箭头函数</span></span><br><span class="line"><span class="comment">// 常见的Vue中reload方法</span></span><br><span class="line"><span class="built_in">this</span>.$nextTick(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">this</span>.reload()</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="特殊调用"><a href="#特殊调用" class="headerlink" title="特殊调用"></a>特殊调用</h2><p>在JS中, 为了提高代码的效率, 提供了几个可以改变this指向的函数call, apply和bind. 虽然和本文介绍this指向的关系不大, 但稍微提及下.<br>常见的调用方式如下:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// call &amp; apply</span></span><br><span class="line"><span class="comment">// attention: call的参数从第二个起是单独的参数，apply的第二个参数是数组</span></span><br><span class="line"><span class="comment">// 将node节点列表的类数组转化为真正的数组</span></span><br><span class="line"><span class="built_in">Array</span>.prototype.slice.call(nodeList)</span><br><span class="line"></span><br><span class="line"><span class="comment">// bind</span></span><br><span class="line"><span class="comment">// attention: bind函数返回的是一个方法</span></span><br><span class="line"><span class="comment">// studentA的对象绑定了sayName方法</span></span><br><span class="line">Person.sayName.bind(studentA)</span><br></pre></td></tr></table></figure>
+
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p><strong>this在JS中指向当前的上下文环境(context), 指向取决于包含它的函数的调用位置.</strong><br>实际使用中, 如何确定当前的上下文环境并不是一件容易的事情. 除了常见的点操作符(.)和中括号操作符([])等在代码中显示的绑定指向外，比较麻烦的是在方法中(function)声明的this, 在执行时才能确定this指向的隐式绑定.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/12/01/%E8%AF%A6%E8%A7%A3JS%E4%B8%AD%E7%9A%84this/" data-id="cknwtpplt00012hre6f2xann3" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF-%E9%9D%A2%E8%AF%95-%E6%89%8B%E5%86%99%E4%BB%A3%E7%A0%81/" rel="tag">前端, 面试, 手写代码</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="[layout]-前端面试笔试题分享" class="article article-type-[layout]" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/11/06/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AF%95%E9%A2%98%E5%88%86%E4%BA%AB/" class="article-date">
@@ -91,81 +142,23 @@
         <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>2019年9月中旬，决定从之前的公司离职。恰逢家里有些事情，我在十月上旬的末尾重新回到上海，并与中旬开始投递简历。感觉不同于以前，不需要怎么复习就能拿 Offer，我开始去面试的时候，大多时候面壁。在这期间，想想还是写点 blog, 记录下来这次特殊的求职经历，并以此共勉。</p>
 <h3 id="知名公司及笔试题分析"><a href="#知名公司及笔试题分析" class="headerlink" title="知名公司及笔试题分析"></a>知名公司及笔试题分析</h3><p>笔试题其实对面试者来说，并不友好。实际开发时，开发者一般都有熟悉的ide，代码补全等工具进行辅助。当转移到了纸上，应聘者不仅需要牢记这些 api，留空白行的手感也完全不同。没有好好准备的话，不经浪费了大量的时间，而且还很容易被刷掉。因此，有换工作的同学，请务必提前3个月刷下题目，并练习下手写代码。</p>
 <ol>
-<li>百度众测<br>百度旗下的平台。稍微有点坑，对算法要求比较高。吐槽下，在JD里添加下重点考察算法如何。  </li>
+<li>百度众测<br>百度旗下的平台。稍微有点坑，对算法要求比较高。吐槽下，在JD里添加下重点考察算法如何。</li>
 </ol>
-<p>1.1 实现排序  </p>
-<pre><code class="javascript">function isArray(arr) {
-  return Object.prototype.toString.call(arr) === &#39;[object Array]&#39;;
-}
-function sort(arr) {
-  if (!isArray(arr)){
-    return [];
-  }
-  if (arr.length &lt; 2) {
-    return [];
-  }
-  var length = arr.length;
-  var temp = [arr[0]];
-  for (var i = 1; i &lt; length; i++) {
-    var tlen = temp.length;
-    for(var j = 0; j &lt; tlen; j++) {
-      if(arr[i] &lt;= temp[0]) {
-        temp.unshift(arr[i]);
-        break;
-      }
-      if (arr[i] &gt;= temp[tlen - 1]) {
-        temp.push(arr[i]);
-        break;
-      }
-      if (arr[i] &gt;= temp[j] &amp;&amp; arr[i] &lt;= temp[j+1]){
-        temp.splice(j+1, 0, arr[i]);
-        break;
-      }
-    }
-  }
-  return temp;
-}
-var arr = [5,4,3,2,1,2,3,6];
-sort(arr); // (8) [1, 2, 2, 3, 3, 4, 5, 6]</code></pre>
-<p>1.2 查找长字符中重复字符最多的字符  </p>
-<pre><code class="javascript">function filter(string){
-  var acc = [];
-  var temp = string.split(&#39;&#39;).sort();
-  var length = string.length;
-  var bcc = [];
-  for (var i = 0; i &lt; length; i++) {
-    if (temp[i] !== bcc[0]) {
-      acc.push(bcc);
-      bcc = [];
-      bcc.push(temp[i]);
-    } else {
-      bcc.push(temp[i]);
-    }
-    continue;
-  }
-  // return acc;
-  console.log(acc); // [Array(0), Array(1), Array(5), Array(2), Array(6), Array(2)]
-  var accLen = acc.length;
-  var maxLen = 0;
-  var maxInd = 0;
-  for (var j = 0; j &lt; accLen; j++) {
-    if (acc[j].length &gt; maxLen) {
-      maxLen = acc[j].length;
-      maxInd = j;
-    }
-  }
-  return acc[maxInd];
-}
-var str = &#39;asjfsjfjsifjilsjflsjf&#39;;
-filter(str); // [&quot;j&quot;, &quot;j&quot;, &quot;j&quot;, &quot;j&quot;, &quot;j&quot;, &quot;j&quot;]</code></pre>
+<p>1.1 实现排序</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 在只检测是否为数组时, Array.isArray是一个更好的选项</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isArray</span>(<span class="params">arr</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// return Object.prototype.toString.call(arr) === &#x27;[object Array]&#x27;</span></span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">Array</span>.isArray(arr)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sort</span>(<span class="params">arr</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (!isArray(arr))&#123;</span><br><span class="line">    <span class="keyword">return</span> [];</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (arr.length &lt; <span class="number">2</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> [];</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">var</span> length = arr.length;</span><br><span class="line">  <span class="keyword">var</span> temp = [arr[<span class="number">0</span>]];</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">1</span>; i &lt; length; i++) &#123;</span><br><span class="line">    <span class="keyword">var</span> tlen = temp.length;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> j = <span class="number">0</span>; j &lt; tlen; j++) &#123;</span><br><span class="line">      <span class="keyword">if</span>(arr[i] &lt;= temp[<span class="number">0</span>]) &#123;</span><br><span class="line">        temp.unshift(arr[i]);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">if</span> (arr[i] &gt;= temp[tlen - <span class="number">1</span>]) &#123;</span><br><span class="line">        temp.push(arr[i]);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">if</span> (arr[i] &gt;= temp[j] &amp;&amp; arr[i] &lt;= temp[j+<span class="number">1</span>])&#123;</span><br><span class="line">        temp.splice(j+<span class="number">1</span>, <span class="number">0</span>, arr[i]);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> temp;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> arr = [<span class="number">5</span>,<span class="number">4</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">6</span>];</span><br><span class="line">sort(arr); <span class="comment">// (8) [1, 2, 2, 3, 3, 4, 5, 6]</span></span><br></pre></td></tr></table></figure>
+
+<p>1.2 查找长字符中重复字符最多的字符</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">filter</span>(<span class="params">string</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> acc = [];</span><br><span class="line">  <span class="keyword">var</span> temp = string.split(<span class="string">&#x27;&#x27;</span>).sort();</span><br><span class="line">  <span class="keyword">var</span> length = string.length;</span><br><span class="line">  <span class="keyword">var</span> bcc = [];</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; length; i++) &#123;</span><br><span class="line">    <span class="keyword">if</span> (temp[i] !== bcc[<span class="number">0</span>]) &#123;</span><br><span class="line">      acc.push(bcc);</span><br><span class="line">      bcc = [];</span><br><span class="line">      bcc.push(temp[i]);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      bcc.push(temp[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">continue</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// return acc;</span></span><br><span class="line">  <span class="built_in">console</span>.log(acc); <span class="comment">// [Array(0), Array(1), Array(5), Array(2), Array(6), Array(2)]</span></span><br><span class="line">  <span class="keyword">var</span> accLen = acc.length;</span><br><span class="line">  <span class="keyword">var</span> maxLen = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">var</span> maxInd = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> j = <span class="number">0</span>; j &lt; accLen; j++) &#123;</span><br><span class="line">    <span class="keyword">if</span> (acc[j].length &gt; maxLen) &#123;</span><br><span class="line">      maxLen = acc[j].length;</span><br><span class="line">      maxInd = j;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> acc[maxInd];</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> str = <span class="string">&#x27;asjfsjfjsifjilsjflsjf&#x27;</span>;</span><br><span class="line">filter(str); <span class="comment">// [&quot;j&quot;, &quot;j&quot;, &quot;j&quot;, &quot;j&quot;, &quot;j&quot;, &quot;j&quot;]</span></span><br></pre></td></tr></table></figure>
+
+
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/11/06/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AF%95%E9%A2%98%E5%88%86%E4%BA%AB/" data-id="ck2n7kddx0000x1q4fmb447ok" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/11/06/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AF%95%E9%A2%98%E5%88%86%E4%BA%AB/" data-id="cknwtpplp00002hre9dmf1ex9" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF%EF%BC%8C%E9%9D%A2%E8%AF%95%EF%BC%8C%E6%89%8B%E5%86%99%E4%BB%A3%E7%A0%81/" rel="tag">前端，面试，手写代码</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF-%E9%9D%A2%E8%AF%95-%E6%89%8B%E5%86%99%E4%BB%A3%E7%A0%81/" rel="tag">前端, 面试, 手写代码</a></li></ul>
 
     </footer>
   </div>
@@ -187,7 +180,7 @@ filter(str); // [&quot;j&quot;, &quot;j&quot;, &quot;j&quot;, &quot;j&quot;, &qu
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF%EF%BC%8C%E9%9D%A2%E8%AF%95%EF%BC%8C%E6%89%8B%E5%86%99%E4%BB%A3%E7%A0%81/" rel="tag">前端，面试，手写代码</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF-%E9%9D%A2%E8%AF%95-%E6%89%8B%E5%86%99%E4%BB%A3%E7%A0%81/" rel="tag">前端, 面试, 手写代码</a></li></ul>
     </div>
   </div>
 
@@ -197,7 +190,7 @@ filter(str); // [&quot;j&quot;, &quot;j&quot;, &quot;j&quot;, &quot;j&quot;, &qu
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/%E5%89%8D%E7%AB%AF%EF%BC%8C%E9%9D%A2%E8%AF%95%EF%BC%8C%E6%89%8B%E5%86%99%E4%BB%A3%E7%A0%81/" style="font-size: 10px;">前端，面试，手写代码</a>
+      <a href="/tags/%E5%89%8D%E7%AB%AF-%E9%9D%A2%E8%AF%95-%E6%89%8B%E5%86%99%E4%BB%A3%E7%A0%81/" style="font-size: 10px;">前端, 面试, 手写代码</a>
     </div>
   </div>
 
@@ -206,7 +199,7 @@ filter(str); // [&quot;j&quot;, &quot;j&quot;, &quot;j&quot;, &quot;j&quot;, &qu
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li></ul>
     </div>
   </div>
 
@@ -217,6 +210,10 @@ filter(str); // [&quot;j&quot;, &quot;j&quot;, &quot;j&quot;, &quot;j&quot;, &qu
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2019/12/01/%E8%AF%A6%E8%A7%A3JS%E4%B8%AD%E7%9A%84this/">JS要点解析-this</a>
+          </li>
         
           <li>
             <a href="/2019/11/06/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AF%95%E9%A2%98%E5%88%86%E4%BA%AB/">前端面试笔试题分享</a>
@@ -234,7 +231,7 @@ filter(str); // [&quot;j&quot;, &quot;j&quot;, &quot;j&quot;, &quot;j&quot;, &qu
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2019 Carlos<br>
+      &copy; 2021 Carlos<br>
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
@@ -252,11 +249,17 @@ filter(str); // [&quot;j&quot;, &quot;j&quot;, &quot;j&quot;, &quot;j&quot;, &qu
 <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
 
 
-  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
-  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
 
 
 <script src="/js/script.js"></script>
+
 
 
 
