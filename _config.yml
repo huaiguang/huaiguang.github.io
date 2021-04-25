@@ -3,12 +3,12 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Artemis
-subtitle: 'my little blog'
+title: '怀光的博客'
+subtitle: '记录想到的点点滴滴'
+keywords: '前端, JS, JavaScript基础, CSS, 有感, 杂谈'
 description: 'Here is the start !'
-keywords: 'fe, '
-author: Carlos
-language: en
+author: 'Artemis'
+language: 'en'
 timezone: ''
 
 # URL

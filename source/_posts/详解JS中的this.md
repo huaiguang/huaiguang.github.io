@@ -1,8 +1,10 @@
 ---
 layout: '[layout]'
-title: JS基础解析-this
-date: 2019-12-01 18:00:00
-tags: 'JS基础'
+title: 'JS基础解析-this'
+keywords: 'keywords'
+description: '附加一段文章摘要，字数最好在140字以内，会出现在meta的description里面'
+date: '2019-12-01 18:00:00'
+tags: ['JS基础']
 ---
 
 ## 前言
@@ -17,9 +19,9 @@ this是JS中绕不过的要点，方方面面都和其相关。在技术的变�
 
 ```javascript
 // 不指定
-// 严格模式下, this为undefined,
+// 严格模式下, this指向undefined,
 // 'use strict'
-// 非严格模式, 下为全局变量window
+// 非严格模式下, this指向全局变量window
 function show() {
   this.a = 'Hello world!'
 }
