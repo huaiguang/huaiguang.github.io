@@ -2,7 +2,7 @@
 layout: '[layout]'
 title: JS基础解析-闭包
 keywords: 'keywords'
-description: '附加一段文章摘要，字数最好在140字以内，会出现在meta的description里面'
+description: 'JS中闭包的概念, 使用方法和注意事项。闭包主要涉及到的JS知识点是函数嵌套和函数作用域链。虽然概念很简洁, 但使用上注意项比较多. 要求上下文context和参数arguments的一致性, 避免全局变量污染和内存泄漏等'
 date: '2019-12-15 18:00:00'
 tags: ['JS基础', '闭包']
 ---
