@@ -2,7 +2,7 @@
 layout: '[layout]'
 title: JS基础解析-原型
 keywords: 'keywords'
-description: 'JS的原型是最重要的要素之一，真可谓为语言的根基。JS中的原型，以及__proto__链接起来的原型链，一起支撑了JS语言中对象的概念。从中引申的继承，面向对象，更是许多经典包的设计基础。'
+description: '原型是JS中很重要的一个概念，JS中面向对象编程的基础。所有的对象都有其原型，以及对象上`__proto__`属性链接起来的原型链，是JS这门语言的构成的基础。理解好原型，在阅读源码，编写组件等诸多方面，有相当的益处。'
 date: '2019-12-08 18:00:00'
 tags: ['JS基础', '原型']
 ---
@@ -10,64 +10,81 @@ tags: ['JS基础', '原型']
 ## 前言
 JS基础解析系列, 主要是为了弄清楚JS中一些常见但容易出错，不常见但有助于理解代码的要点。不定时更新，请多多见谅。
 
-## 原型prototype
-原型是JS中很重要的一个概念，JS中面向对象编程的基础。追溯到源头，所有的对象都有其原型，以及由`__proto__`链接起来的原型链，是JS这门语言的构成的基础。理解好原型，在阅读源码，编写组件等诸多方面，有相当的益处。
+原型是JS中很重要的一个概念，JS中面向对象编程的基础。所有的对象都有其原型, 所有对象上`__proto__`属性链接起来的原型链，是JS这门语言的构成的基础。理解好原型，在阅读源码，编写组件等诸多方面，有相当的益处。
 
-## 在ES2015之前
-在ES6之前, 最常用的包还是jQuery的时代. 主流的方式是通过构造函数，模拟面向对象来编写代码.
-常见用法如下:
-
+## 原型(prototype)
+JS 中每个函数都有一个`prototype`原型对象, 例如`Object.prototype`. 比较常见的代码如下:
 ```javascript
-// 不指定
-// 严格模式下, this为undefined,
-// 'use strict'
-// 非严格模式, 下为全局变量window
-function show() {
-  this.a = 'Hello world!'
-}
-show()
-
-// 直接在元素上添加方法
-document.getElementById('test').onclick = function() {
-  // this指向id为test的元素
-  this.innerHTML = 'Hello world!'
-}
-
-// 构造函数+new
-function Point() {
-  // this指向当前创建的对象
+function Point(x, y) {
   this.x = x
   this.y = y
 }
+
+Point.prototype.say = function() {
+  return `x is ${this.x}, y is ${this.y}`
+}
+
+const pointA = new Point(1,2)
+console.log(pointA) // Point { x: 1, y: 2 }
+const sayA = pointA.say()
+console.log('say:', sayA) // say: x is 1, y is 2
+
 ```
+如果仔细一点的话，可以在以上的代码中发现一些特别的地方：
+- 定义的`Point`函数首字母大写
+- 在`console`中打印的`Point`对象中，除去定义的属性x, y, 还有一个`__proto__`属性. 在`__proto__`属性中, 有上面显示定义的`say`函数, 还有`constructor`(*指向Point函数*), 以及`__proto__`(*指向Object.prototype*).
 
-## 在ES2015之后
-ES6中引入了箭头函数(=>), 增加了一种this的使用方法. 配合上Vue, React等框架，降低了前端开发的难度，使得前端可以更加的专注于业务.
-常见的用法如下:
+### 构造函数(`constructor`)
+类似于上面定义的 Point函数, 这类函数叫做构造函数。比较常见的构造函数为Object, Array, String等等。通过new关键字, 构造函数可以创建一个对象。
 
+new关键字创建对象的过程如下:
+1. 创建一个继承于构造函数的prototype属性的对象
+2. 调用构造函数, 并将步骤1新创建的对象作为this的上下文
+3. 如果构造函数的是一个对象, 则返回这个对象；否则返回的是上述步骤中新创建的this.
+
+返回了对象，覆盖了定义的对象类型的情况暂不讨论。这里集中于没有返回对象，按照定义的对象类型创建了对象示例的情况. 经构造函数创建的所有实例，共享构造函数的prototype，这也是js继承的基础。
+
+### `prototype和__proto__属性`
+*每一个方法都有原型prototype，每一个对象都有一个__proto__.* 每个对象的__proto__属性指向其构造函数的 prototype 属性。构造函数本身作为对象，其__proto__属性指向`Function.prototype`
+来做一些有趣的实验, 如下的表达式是true or false.
 ```javascript
-// 箭头函数
-// 常见的Vue中reload方法
-this.$nextTick(() => {
-  this.reload()
-})
-```
+pointA.__proto__ === Point.prototype
+pointA.__proto__.constructor === Point
+Point.__proto__ === Function.prototype
+Point.prototype.__proto__ === Object.prototype
+Point.prototype.constructor === Point
+Function.prototype.__proto__ === Object.prototype
+Object.prototype.__proto__ === null
 
-## 特殊调用
-在JS中, 为了提高代码的效率, 提供了几个可以改变this指向的函数call, apply和bind. 虽然和本文介绍this指向的关系不大, 但稍微提及下.
-常见的调用方式如下:
+```
+稍微花费点时间考虑下，或许收获会更多。
+
+### 原型链(`__proto__`)
+所有创建的实例，都可以通过__proto__属性连接其构造函数的prototype. 例如上文中pointA.x和pointA.say都可以访问, pointA.x是显式访问，pointA.say则是隐式访问.
+隐式访问是通过原型链来实现的。实例对象与原型之间的连接，叫做原型链。当在对象中查找某个属性时，如果在当前的对象中能够查到，该直接返回该属性；如果在当前的对象中查找不到，则会顺着原型链，即__proto__属性指向的对象往上查找，直到到达链路的源头。
+
+### 继承
 ```javascript
-// call & apply
-// attention: call的参数从第二个起是单独的参数，apply的第二个参数是数组
-// 将node节点列表的类数组转化为真正的数组
-Array.prototype.slice.call(nodeList)
+function Point(x, y) {
+  this.x = x
+  this.y = y
+}
 
-// bind
-// attention: bind函数返回的是一个方法
-// studentA的对象绑定了sayName方法
-Person.sayName.bind(studentA)
+Point.prototype.say = function() {
+  return `x is ${this.x}, y is ${this.y}`
+}
+
+const pointA = new Point(1,2)
+const pointB = new Point(3,4)
+
+// JS中两个对象不会全等, 只有相同的对象引用才会全等
+pointA.x === 1 // true
+pointB.x === 3 // true
+pointA.say === pointB.say // true
 ```
 
-## 总结
-**this在JS中指向当前的上下文环境(context), 指向取决于包含它的函数的调用位置.**
-实际使用中, 如何确定当前的上下文环境并不是一件容易的事情. 除了常见的点操作符(.)和中括号操作符([])等在代码中显示的绑定指向外，比较麻烦的是在方法中(function)声明的this, 在执行时才能确定this指向的隐式绑定.
+落实到代码中, 也就是创建类似class的继承。通过构造函数创建的对象，定义的属性是各自的，但__proto__指向的constructor的prototype是共享的。在ES2015中，可以直接通过关键戏class来创建对象了，不过polyfill的实现也是基于此。
+上述是基本的继承，在实际应用中，会为了满足需求，做一些封装，不过那是另一个篇章了。
+
+## 引用
+1. [MDN](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/new)
