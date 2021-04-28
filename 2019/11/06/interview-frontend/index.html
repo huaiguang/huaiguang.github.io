@@ -5,25 +5,24 @@
   <!-- 
  -->
   
-  <title>前端面试笔试题分享 | Artemis</title>
+  <title>前端面试题 | 怀光的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="前言2019年9月中旬，决定从之前的公司离职。恰逢家里有些事情，我在十月上旬的末尾重新回到上海，并与中旬开始投递简历。感觉不同于以前，不需要怎么复习就能拿 Offer，我开始去面试的时候，大多时候面壁。在这期间，想想还是写点 blog, 记录下来这次特殊的求职经历，并以此共勉。 知名公司及笔试题分析笔试题其实对面试者来说，并不友好。实际开发时，开发者一般都有熟悉的ide，代码补全等工具进行辅助。当">
+  <meta name="description" content="前端面试题, 包含一些手写题. 在脱离了电脑, 没有api提示, 进件白纸黑字处理, 会有极大的违和感.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="前端面试笔试题分享">
-<meta property="og:url" content="http://yoursite.com/2019/11/06/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AF%95%E9%A2%98%E5%88%86%E4%BA%AB/index.html">
-<meta property="og:site_name" content="Artemis">
-<meta property="og:description" content="前言2019年9月中旬，决定从之前的公司离职。恰逢家里有些事情，我在十月上旬的末尾重新回到上海，并与中旬开始投递简历。感觉不同于以前，不需要怎么复习就能拿 Offer，我开始去面试的时候，大多时候面壁。在这期间，想想还是写点 blog, 记录下来这次特殊的求职经历，并以此共勉。 知名公司及笔试题分析笔试题其实对面试者来说，并不友好。实际开发时，开发者一般都有熟悉的ide，代码补全等工具进行辅助。当">
+<meta property="og:title" content="前端面试题">
+<meta property="og:url" content="http://yoursite.com/2019/11/06/interview-frontend/index.html">
+<meta property="og:site_name" content="怀光的博客">
+<meta property="og:description" content="前端面试题, 包含一些手写题. 在脱离了电脑, 没有api提示, 进件白纸黑字处理, 会有极大的违和感.">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2019-11-06T18:01:40.000Z">
-<meta property="article:modified_time" content="2021-04-25T07:00:53.444Z">
-<meta property="article:author" content="Carlos">
-<meta property="article:tag" content="前端, 面试, 手写代码">
+<meta property="article:published_time" content="2019-11-06T18:00:00.000Z">
+<meta property="article:modified_time" content="2021-04-28T08:52:40.833Z">
+<meta property="article:author" content="Artemis">
+<meta property="article:tag" content="前端面试">
+<meta property="article:tag" content="面试题">
 <meta name="twitter:card" content="summary">
   
-    <link rel="alternate" href="/atom.xml" title="Artemis" type="application/atom+xml">
   
-  
-    <link rel="icon" href="/favicon.png">
+    <link rel="icon" href="/favicon.ico">
   
   
     <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
@@ -41,7 +40,7 @@
   <div id="header-outer" class="outer">
     <div id="header-title" class="inner">
       <h1 id="logo-wrap">
-        <a href="/" id="logo">Artemis</a>
+        <a href="/" id="logo">怀光的博客</a>
       </h1>
       
     </div>
@@ -53,10 +52,12 @@
         
           <a class="main-nav-link" href="/archives">Archives</a>
         
+          <a class="main-nav-link" href="/gallery">Gallery</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
       </nav>
       <nav id="sub-nav">
-        
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
         <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
@@ -67,10 +68,10 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="[layout]-前端面试笔试题分享" class="article article-type-[layout]" itemscope itemprop="blogPost">
+        <section id="main"><article id="[layout]-interview-frontend" class="article article-type-[layout]" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/11/06/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AF%95%E9%A2%98%E5%88%86%E4%BA%AB/" class="article-date">
-  <time datetime="2019-11-06T18:01:40.000Z" itemprop="datePublished">2019-11-06</time>
+    <a href="/2019/11/06/interview-frontend/" class="article-date">
+  <time datetime="2019-11-06T18:00:00.000Z" itemprop="datePublished">2019-11-06</time>
 </a>
     
   </div>
@@ -81,7 +82,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      前端面试笔试题分享
+      前端面试题
     </h1>
   
 
@@ -90,6 +91,9 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>2019年9月中旬，决定从之前的公司离职。恰逢家里有些事情，我在十月上旬的末尾重新回到上海，并与中旬开始投递简历。感觉不同于以前，不需要怎么复习就能拿 Offer，我开始去面试的时候，大多时候面壁。在这期间，想想还是写点 blog, 记录下来这次特殊的求职经历，并以此共勉。</p>
+<h3 id="常见函数"><a href="#常见函数" class="headerlink" title="常见函数"></a>常见函数</h3><h3 id="斐波那函数"><a href="#斐波那函数" class="headerlink" title="斐波那函数"></a>斐波那函数</h3><p>因兔子繁殖引入而又被称为”兔子数列”. 特征是从第三项开始, 每一项都是前两项之和。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 用递归法实现斐波那契数列代码实现比较简洁，但在n比较大时会引起栈溢出，无法实现所需功能。</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fib</span>(<span class="params">n</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (n === <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (n === <span class="number">1</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> fib(n - <span class="number">1</span>) + fib(n - <span class="number">2</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 尾调用</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fib</span>(<span class="params">n, ac1 = <span class="number">1</span>, ac2 = <span class="number">1</span></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (n &lt;= <span class="number">2</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> ac2</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> fib(n - <span class="number">1</span>, ac2, ac1 + ac2)</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
 <h3 id="知名公司及笔试题分析"><a href="#知名公司及笔试题分析" class="headerlink" title="知名公司及笔试题分析"></a>知名公司及笔试题分析</h3><p>笔试题其实对面试者来说，并不友好。实际开发时，开发者一般都有熟悉的ide，代码补全等工具进行辅助。当转移到了纸上，应聘者不仅需要牢记这些 api，留空白行的手感也完全不同。没有好好准备的话，不经浪费了大量的时间，而且还很容易被刷掉。因此，有换工作的同学，请务必提前3个月刷下题目，并练习下手写代码。</p>
 <ol>
 <li>百度众测<br>百度旗下的平台。稍微有点坑，对算法要求比较高。吐槽下，在JD里添加下重点考察算法如何。</li>
@@ -105,10 +109,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/11/06/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AF%95%E9%A2%98%E5%88%86%E4%BA%AB/" data-id="cknwtpplp00002hre9dmf1ex9" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/11/06/interview-frontend/" data-id="cko180fke0000znty92zkeqvc" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF-%E9%9D%A2%E8%AF%95-%E6%89%8B%E5%86%99%E4%BB%A3%E7%A0%81/" rel="tag">前端, 面试, 手写代码</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95/" rel="tag">前端面试</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95%E9%A2%98/" rel="tag">面试题</a></li></ul>
 
     </footer>
   </div>
@@ -116,11 +120,11 @@
     
 <nav id="article-nav">
   
-    <a href="/2019/12/01/%E8%AF%A6%E8%A7%A3JS%E4%B8%AD%E7%9A%84this/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2019/12/01/js-this/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          JS要点解析-this
+          JS基础解析-this
         
       </div>
     </a>
@@ -142,7 +146,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF-%E9%9D%A2%E8%AF%95-%E6%89%8B%E5%86%99%E4%BB%A3%E7%A0%81/" rel="tag">前端, 面试, 手写代码</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JS%E5%9F%BA%E7%A1%80/" rel="tag">JS基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/this/" rel="tag">this</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95/" rel="tag">前端面试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8E%9F%E5%9E%8B/" rel="tag">原型</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%97%AD%E5%8C%85/" rel="tag">闭包</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95%E9%A2%98/" rel="tag">面试题</a></li></ul>
     </div>
   </div>
 
@@ -152,7 +156,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/%E5%89%8D%E7%AB%AF-%E9%9D%A2%E8%AF%95-%E6%89%8B%E5%86%99%E4%BB%A3%E7%A0%81/" style="font-size: 10px;">前端, 面试, 手写代码</a>
+      <a href="/tags/JS%E5%9F%BA%E7%A1%80/" style="font-size: 20px;">JS基础</a> <a href="/tags/this/" style="font-size: 10px;">this</a> <a href="/tags/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95/" style="font-size: 10px;">前端面试</a> <a href="/tags/%E5%8E%9F%E5%9E%8B/" style="font-size: 10px;">原型</a> <a href="/tags/%E9%97%AD%E5%8C%85/" style="font-size: 10px;">闭包</a> <a href="/tags/%E9%9D%A2%E8%AF%95%E9%A2%98/" style="font-size: 10px;">面试题</a>
     </div>
   </div>
 
@@ -174,11 +178,19 @@
       <ul>
         
           <li>
-            <a href="/2019/12/01/%E8%AF%A6%E8%A7%A3JS%E4%B8%AD%E7%9A%84this/">JS要点解析-this</a>
+            <a href="/2019/12/15/js-closure/">JS基础解析-闭包</a>
           </li>
         
           <li>
-            <a href="/2019/11/06/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AF%95%E9%A2%98%E5%88%86%E4%BA%AB/">前端面试笔试题分享</a>
+            <a href="/2019/12/08/js-prototype/">JS基础解析-原型</a>
+          </li>
+        
+          <li>
+            <a href="/2019/12/01/js-this/">JS基础解析-this</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/06/interview-frontend/">前端面试题</a>
           </li>
         
       </ul>
@@ -193,7 +205,7 @@
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2021 Carlos<br>
+      &copy; 2021 Artemis<br>
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
@@ -204,6 +216,10 @@
     <a href="/" class="mobile-nav-link">Home</a>
   
     <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/gallery" class="mobile-nav-link">Gallery</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
   
 </nav>
     

@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <!-- 
+ -->
+  
+  <title>JS基础解析-原型 | 怀光的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="原型是JS中很重要的一个概念，JS中面向对象编程的基础。所有的对象都有其原型，以及对象上&#96;__proto__&#96;属性链接起来的原型链，是JS这门语言的构成的基础。理解好原型，在阅读源码，编写组件等诸多方面，有相当的益处。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS基础解析-原型">
+<meta property="og:url" content="http://yoursite.com/2019/12/08/js-prototype/index.html">
+<meta property="og:site_name" content="怀光的博客">
+<meta property="og:description" content="原型是JS中很重要的一个概念，JS中面向对象编程的基础。所有的对象都有其原型，以及对象上&#96;__proto__&#96;属性链接起来的原型链，是JS这门语言的构成的基础。理解好原型，在阅读源码，编写组件等诸多方面，有相当的益处。">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2019-12-08T18:00:00.000Z">
+<meta property="article:modified_time" content="2021-04-28T08:52:40.833Z">
+<meta property="article:author" content="Artemis">
+<meta property="article:tag" content="JS基础">
+<meta property="article:tag" content="原型">
+<meta name="twitter:card" content="summary">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">怀光的博客</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/gallery">Gallery</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="[layout]-js-prototype" class="article article-type-[layout]" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/12/08/js-prototype/" class="article-date">
+  <time datetime="2019-12-08T18:00:00.000Z" itemprop="datePublished">2019-12-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      JS基础解析-原型
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>JS基础解析系列, 主要是为了弄清楚JS中一些常见但容易出错，不常见但有助于理解代码的要点。不定时更新，请多多见谅。</p>
+<p>原型是JS中很重要的一个概念，JS中面向对象编程的基础。所有的对象都有其原型, 所有对象上<code>__proto__</code>属性链接起来的原型链，是JS这门语言的构成的基础。理解好原型，在阅读源码，编写组件等诸多方面，有相当的益处。</p>
+<h2 id="原型-prototype"><a href="#原型-prototype" class="headerlink" title="原型(prototype)"></a>原型(prototype)</h2><p>JS 中每个函数都有一个<code>prototype</code>原型对象, 例如<code>Object.prototype</code>. 比较常见的代码如下:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Point</span>(<span class="params">x, y</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">this</span>.x = x</span><br><span class="line">  <span class="built_in">this</span>.y = y</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Point.prototype.say = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="string">`x is <span class="subst">$&#123;<span class="built_in">this</span>.x&#125;</span>, y is <span class="subst">$&#123;<span class="built_in">this</span>.y&#125;</span>`</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> pointA = <span class="keyword">new</span> Point(<span class="number">1</span>,<span class="number">2</span>)</span><br><span class="line"><span class="built_in">console</span>.log(pointA) <span class="comment">// Point &#123; x: 1, y: 2 &#125;</span></span><br><span class="line"><span class="keyword">const</span> sayA = pointA.say()</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&#x27;say:&#x27;</span>, sayA) <span class="comment">// say: x is 1, y is 2</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>如果仔细一点的话，可以在以上的代码中发现一些特别的地方：</p>
+<ul>
+<li>定义的<code>Point</code>函数首字母大写</li>
+<li>在<code>console</code>中打印的<code>Point</code>对象中，除去定义的属性x, y, 还有一个<code>__proto__</code>属性. 在<code>__proto__</code>属性中, 有上面显示定义的<code>say</code>函数, 还有<code>constructor</code>(<em>指向Point函数</em>), 以及<code>__proto__</code>(<em>指向Object.prototype</em>).</li>
+</ul>
+<h3 id="构造函数-constructor"><a href="#构造函数-constructor" class="headerlink" title="构造函数(constructor)"></a>构造函数(<code>constructor</code>)</h3><p>类似于上面定义的 Point函数, 这类函数叫做构造函数。比较常见的构造函数为Object, Array, String等等。通过new关键字, 构造函数可以创建一个对象。</p>
+<p>new关键字创建对象的过程如下:</p>
+<ol>
+<li>创建一个继承于构造函数的prototype属性的对象</li>
+<li>调用构造函数, 并将步骤1新创建的对象作为this的上下文</li>
+<li>如果构造函数的是一个对象, 则返回这个对象；否则返回的是上述步骤中新创建的this.</li>
+</ol>
+<p>返回了对象，覆盖了定义的对象类型的情况暂不讨论。这里集中于没有返回对象，按照定义的对象类型创建了对象示例的情况. 经构造函数创建的所有实例，共享构造函数的prototype，这也是js继承的基础。</p>
+<h3 id="prototype和-proto-属性"><a href="#prototype和-proto-属性" class="headerlink" title="prototype和__proto__属性"></a><code>prototype和__proto__属性</code></h3><p>*每一个方法都有原型prototype，每一个对象都有一个__proto__.* 每个对象的__proto__属性指向其构造函数的 prototype 属性。构造函数本身作为对象，其__proto__属性指向<code>Function.prototype</code><br>来做一些有趣的实验, 如下的表达式是true or false.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">pointA.__proto__ === Point.prototype</span><br><span class="line">pointA.__proto__.constructor === Point</span><br><span class="line">Point.__proto__ === <span class="built_in">Function</span>.prototype</span><br><span class="line">Point.prototype.__proto__ === <span class="built_in">Object</span>.prototype</span><br><span class="line">Point.prototype.constructor === Point</span><br><span class="line"><span class="built_in">Function</span>.prototype.__proto__ === <span class="built_in">Object</span>.prototype</span><br><span class="line"><span class="built_in">Object</span>.prototype.__proto__ === <span class="literal">null</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>稍微花费点时间考虑下，或许收获会更多。</p>
+<h3 id="原型链-proto"><a href="#原型链-proto" class="headerlink" title="原型链(__proto__)"></a>原型链(<code>__proto__</code>)</h3><p>所有创建的实例，都可以通过__proto__属性连接其构造函数的prototype. 例如上文中pointA.x和pointA.say都可以访问, pointA.x是显式访问，pointA.say则是隐式访问.<br>隐式访问是通过原型链来实现的。实例对象与原型之间的连接，叫做原型链。当在对象中查找某个属性时，如果在当前的对象中能够查到，该直接返回该属性；如果在当前的对象中查找不到，则会顺着原型链，即__proto__属性指向的对象往上查找，直到到达链路的源头。</p>
+<h3 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Point</span>(<span class="params">x, y</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">this</span>.x = x</span><br><span class="line">  <span class="built_in">this</span>.y = y</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Point.prototype.say = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="string">`x is <span class="subst">$&#123;<span class="built_in">this</span>.x&#125;</span>, y is <span class="subst">$&#123;<span class="built_in">this</span>.y&#125;</span>`</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> pointA = <span class="keyword">new</span> Point(<span class="number">1</span>,<span class="number">2</span>)</span><br><span class="line"><span class="keyword">const</span> pointB = <span class="keyword">new</span> Point(<span class="number">3</span>,<span class="number">4</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// JS中两个对象不会全等, 只有相同的对象引用才会全等</span></span><br><span class="line">pointA.x === <span class="number">1</span> <span class="comment">// true</span></span><br><span class="line">pointB.x === <span class="number">3</span> <span class="comment">// true</span></span><br><span class="line">pointA.say === pointB.say <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<p>落实到代码中, 也就是创建类似class的继承。通过构造函数创建的对象，定义的属性是各自的，但__proto__指向的constructor的prototype是共享的。在ES2015中，可以直接通过关键戏class来创建对象了，不过polyfill的实现也是基于此。<br>上述是基本的继承，在实际应用中，会为了满足需求，做一些封装，不过那是另一个篇章了。</p>
+<h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h2><ol>
+<li><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/new">MDN</a></li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/12/08/js-prototype/" data-id="cko180fkl0003znty1tn0f8m2" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS%E5%9F%BA%E7%A1%80/" rel="tag">JS基础</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8E%9F%E5%9E%8B/" rel="tag">原型</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/12/15/js-closure/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          JS基础解析-闭包
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/12/01/js-this/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">JS基础解析-this</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JS%E5%9F%BA%E7%A1%80/" rel="tag">JS基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/this/" rel="tag">this</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95/" rel="tag">前端面试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8E%9F%E5%9E%8B/" rel="tag">原型</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%97%AD%E5%8C%85/" rel="tag">闭包</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95%E9%A2%98/" rel="tag">面试题</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/JS%E5%9F%BA%E7%A1%80/" style="font-size: 20px;">JS基础</a> <a href="/tags/this/" style="font-size: 10px;">this</a> <a href="/tags/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95/" style="font-size: 10px;">前端面试</a> <a href="/tags/%E5%8E%9F%E5%9E%8B/" style="font-size: 10px;">原型</a> <a href="/tags/%E9%97%AD%E5%8C%85/" style="font-size: 10px;">闭包</a> <a href="/tags/%E9%9D%A2%E8%AF%95%E9%A2%98/" style="font-size: 10px;">面试题</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/12/15/js-closure/">JS基础解析-闭包</a>
+          </li>
+        
+          <li>
+            <a href="/2019/12/08/js-prototype/">JS基础解析-原型</a>
+          </li>
+        
+          <li>
+            <a href="/2019/12/01/js-this/">JS基础解析-this</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/06/interview-frontend/">前端面试题</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2021 Artemis<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/gallery" class="mobile-nav-link">Gallery</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav>
+    
+
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
