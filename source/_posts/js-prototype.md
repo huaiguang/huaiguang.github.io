@@ -1,10 +1,10 @@
 ---
-layout: '[layout]'
-title: JS基础解析-原型
+title: JS基础-原型
 keywords: 'keywords'
 description: '原型是JS中很重要的一个概念，JS中面向对象编程的基础。所有的对象都有其原型，以及对象上`__proto__`属性链接起来的原型链，是JS这门语言的构成的基础。理解好原型，在阅读源码，编写组件等诸多方面，有相当的益处。'
+categories: ['JS base']
+tags: ['prototype']
 date: '2019-12-08 18:00:00'
-tags: ['JS基础', '原型']
 ---
 
 ## 前言

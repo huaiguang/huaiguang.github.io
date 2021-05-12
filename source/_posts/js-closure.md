@@ -1,10 +1,10 @@
 ---
-layout: '[layout]'
-title: JS基础解析-闭包
+title: JS基础-闭包
 keywords: 'keywords'
 description: 'JS中闭包的概念, 使用方法和注意事项。闭包主要涉及到的JS知识点是函数嵌套和函数作用域链。虽然概念很简洁, 但使用上注意项比较多. 要求上下文context和参数arguments的一致性, 避免全局变量污染和内存泄漏等'
+categories: ['JS base']
+tags: ['closure']
 date: '2019-12-15 18:00:00'
-tags: ['JS基础', '闭包']
 ---
 
 ## 前言

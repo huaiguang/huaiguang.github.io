@@ -99,6 +99,8 @@ ignore:
 theme: landscape
 
 # Deployment
-## Docs: https://hexo.io/docs/deployment.html
+## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
-  type: ''
+  type: git
+  repository: git@github.com:huaiguang/huaiguang.github.io.git
+  branch: master
