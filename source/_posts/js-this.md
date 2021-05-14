@@ -1,10 +1,10 @@
 ---
-title: 'JS基础-this'
-keywords: 'keywords'
-description: 'JS中this指当前执行的上下文环境context, 属于概念上很简单, 但实际中极可能被绕晕的点. 在实际中, 由于很多函数是在执行时才赋予上下文环境context, 需要仔细分析，才不会迷惑.'
-categories: ['JS base']
-tags: ['this']
-date: '2019-12-01 18:00:00'
+title: JS基础-this
+keywords: keywords
+description: JS中this指当前执行的上下文环境context, 属于概念上很简单, 但实际中极可能被绕晕的点. 在实际中, 由于很多函数是在执行时才赋予上下文环境context, 需要仔细分析，才不会迷惑.
+categories: JS base
+tags: js this
+date: 2019-12-01 18:00:00
 ---
 
 ## 前言

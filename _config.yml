@@ -3,13 +3,13 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: '怀光的博客'
-subtitle: '记录想到的点点滴滴'
-keywords: '前端, JS, JavaScript基础, CSS, 有感, 杂谈'
-description: 'Here is the start !'
-author: 'Artemis'
-language: 'en'
-timezone: ''
+title: 怀光的博客
+subtitle: 记录生活的点点滴滴
+keywords: 前端, JS, JavaScript基础, CSS, 有感, 杂谈
+description: Where there is a will, there is a way!
+author: Artemis
+language: en
+timezone:
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
@@ -96,7 +96,9 @@ ignore:
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: landscape
+## theme: landscape
+## theme: indigo 待处理
+theme: next
 
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment

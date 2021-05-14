@@ -1,10 +1,10 @@
 ---
-title: '前端面试题'
-keywords: '前端, 面试, 面试题'
-description: '前端面试题, 包含一些手写题. 在脱离了电脑, 没有api提示, 进件白纸黑字处理, 会有极大的违和感.'
-date: '2019-11-06 18:00:00'
-categories: ['interview']
-tags: ['interview question']
+title: 前端面试题
+keywords: 前端, 面试, 面试题
+description: 前端面试题, 包含一些手写题. 在脱离了电脑, 没有api提示, 进件白纸黑字处理, 会有极大的违和感.
+date: 2019-11-06 18:00:00
+categories: interview
+tags: interview question
 ---
 
 ## 序言
