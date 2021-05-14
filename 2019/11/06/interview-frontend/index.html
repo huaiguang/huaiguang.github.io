@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <!-- 
+ -->
+  
+  <title>前端面试题 | 怀光的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="前端面试题, 包含一些手写题. 在脱离了电脑, 没有api提示, 进件白纸黑字处理, 会有极大的违和感.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前端面试题">
+<meta property="og:url" content="http://yoursite.com/2019/11/06/interview-frontend/index.html">
+<meta property="og:site_name" content="怀光的博客">
+<meta property="og:description" content="前端面试题, 包含一些手写题. 在脱离了电脑, 没有api提示, 进件白纸黑字处理, 会有极大的违和感.">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2019-11-06T18:00:00.000Z">
+<meta property="article:modified_time" content="2019-11-06T18:00:00.000Z">
+<meta property="article:author" content="Artemis">
+<meta property="article:tag" content="interview question">
+<meta name="twitter:card" content="summary">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="怀光的博客" type="application/atom+xml">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">怀光的博客</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/gallery">Gallery</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-interview-frontend" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/11/06/interview-frontend/" class="article-date">
+  <time datetime="2019-11-06T18:00:00.000Z" itemprop="datePublished">2019-11-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/interview/">interview</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      前端面试题
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="序言"><a href="#序言" class="headerlink" title="序言"></a>序言</h2><p>2019年9月中旬，决定从之前的公司离职。恰逢家里有些事情，我在十月上旬的末尾重新回到上海，并与中旬开始投递简历。感觉不同于以前，不需要怎么复习就能拿 Offer，我开始去面试的时候，大多时候面壁。在这期间，想想还是写点 blog, 记录下来这次特殊的求职经历，并以此共勉。</p>
+<h3 id="常见函数"><a href="#常见函数" class="headerlink" title="常见函数"></a>常见函数</h3><h4 id="斐波那函数"><a href="#斐波那函数" class="headerlink" title="斐波那函数"></a>斐波那函数</h4><p>因兔子繁殖引入而又被称为”兔子数列”. 特征是从第三项开始, 每一项都是前两项之和。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 用递归法实现斐波那契数列代码实现比较简洁，但在n比较大时会引起栈溢出，无法实现所需功能。</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fib</span>(<span class="params">n</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (n === <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (n === <span class="number">1</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> fib(n - <span class="number">1</span>) + fib(n - <span class="number">2</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 尾调用</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fib</span>(<span class="params">n, ac1 = <span class="number">1</span>, ac2 = <span class="number">1</span></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (n &lt;= <span class="number">2</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> ac2</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> fib(n - <span class="number">1</span>, ac2, ac1 + ac2)</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="知名公司及笔试题分析"><a href="#知名公司及笔试题分析" class="headerlink" title="知名公司及笔试题分析"></a>知名公司及笔试题分析</h3><p>笔试题其实对面试者来说，并不友好。实际开发时，开发者一般都有熟悉的ide，代码补全等工具进行辅助。当转移到了纸上，应聘者不仅需要牢记这些 api，留空白行的手感也完全不同。没有好好准备的话，不经浪费了大量的时间，而且还很容易被刷掉。因此，有换工作的同学，请务必提前3个月刷下题目，并练习下手写代码。</p>
+<ol>
+<li>百度众测<br>百度旗下的平台。稍微有点坑，对算法要求比较高。吐槽下，在JD里添加下重点考察算法如何。</li>
+</ol>
+<p>1.1 实现排序</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 在只检测是否为数组时, Array.isArray是一个更好的选项</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isArray</span>(<span class="params">arr</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// return Object.prototype.toString.call(arr) === &#x27;[object Array]&#x27;</span></span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">Array</span>.isArray(arr)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sort</span>(<span class="params">arr</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (!isArray(arr))&#123;</span><br><span class="line">    <span class="keyword">return</span> [];</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (arr.length &lt; <span class="number">2</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> [];</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">var</span> length = arr.length;</span><br><span class="line">  <span class="keyword">var</span> temp = [arr[<span class="number">0</span>]];</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">1</span>; i &lt; length; i++) &#123;</span><br><span class="line">    <span class="keyword">var</span> tlen = temp.length;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> j = <span class="number">0</span>; j &lt; tlen; j++) &#123;</span><br><span class="line">      <span class="keyword">if</span>(arr[i] &lt;= temp[<span class="number">0</span>]) &#123;</span><br><span class="line">        temp.unshift(arr[i]);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">if</span> (arr[i] &gt;= temp[tlen - <span class="number">1</span>]) &#123;</span><br><span class="line">        temp.push(arr[i]);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">if</span> (arr[i] &gt;= temp[j] &amp;&amp; arr[i] &lt;= temp[j+<span class="number">1</span>])&#123;</span><br><span class="line">        temp.splice(j+<span class="number">1</span>, <span class="number">0</span>, arr[i]);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> temp;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> arr = [<span class="number">5</span>,<span class="number">4</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">6</span>];</span><br><span class="line">sort(arr); <span class="comment">// (8) [1, 2, 2, 3, 3, 4, 5, 6]</span></span><br></pre></td></tr></table></figure>
+
+<p>1.2 查找长字符中重复字符最多的字符</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">filter</span>(<span class="params">string</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> acc = [];</span><br><span class="line">  <span class="keyword">var</span> temp = string.split(<span class="string">&#x27;&#x27;</span>).sort();</span><br><span class="line">  <span class="keyword">var</span> length = string.length;</span><br><span class="line">  <span class="keyword">var</span> bcc = [];</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; length; i++) &#123;</span><br><span class="line">    <span class="keyword">if</span> (temp[i] !== bcc[<span class="number">0</span>]) &#123;</span><br><span class="line">      acc.push(bcc);</span><br><span class="line">      bcc = [];</span><br><span class="line">      bcc.push(temp[i]);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      bcc.push(temp[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">continue</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// return acc;</span></span><br><span class="line">  <span class="built_in">console</span>.log(acc); <span class="comment">// [Array(0), Array(1), Array(5), Array(2), Array(6), Array(2)]</span></span><br><span class="line">  <span class="keyword">var</span> accLen = acc.length;</span><br><span class="line">  <span class="keyword">var</span> maxLen = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">var</span> maxInd = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> j = <span class="number">0</span>; j &lt; accLen; j++) &#123;</span><br><span class="line">    <span class="keyword">if</span> (acc[j].length &gt; maxLen) &#123;</span><br><span class="line">      maxLen = acc[j].length;</span><br><span class="line">      maxInd = j;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> acc[maxInd];</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> str = <span class="string">&#x27;asjfsjfjsifjilsjflsjf&#x27;</span>;</span><br><span class="line">filter(str); <span class="comment">// [&quot;j&quot;, &quot;j&quot;, &quot;j&quot;, &quot;j&quot;, &quot;j&quot;, &quot;j&quot;]</span></span><br></pre></td></tr></table></figure>
+
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/11/06/interview-frontend/" data-id="ckonygeo8000c1zqc3zdubfbe" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/interview-question/" rel="tag">interview question</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/12/01/js-this/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          JS基础-this
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/JS-base/">JS base</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo/">hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/interview/">interview</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo-themes/" rel="tag">hexo themes</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/interview-question/" rel="tag">interview question</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js-closure/" rel="tag">js closure</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js-prototype/" rel="tag">js prototype</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js-this/" rel="tag">js this</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/hexo-themes/" style="font-size: 10px;">hexo themes</a> <a href="/tags/interview-question/" style="font-size: 10px;">interview question</a> <a href="/tags/js-closure/" style="font-size: 10px;">js closure</a> <a href="/tags/js-prototype/" style="font-size: 10px;">js prototype</a> <a href="/tags/js-this/" style="font-size: 10px;">js this</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/12/29/hexo-theme-next/">hexo-theme</a>
+          </li>
+        
+          <li>
+            <a href="/2019/12/15/js-closure/">JS基础-闭包</a>
+          </li>
+        
+          <li>
+            <a href="/2019/12/08/js-prototype/">JS基础-原型</a>
+          </li>
+        
+          <li>
+            <a href="/2019/12/01/js-this/">JS基础-this</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/06/interview-frontend/">前端面试题</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2021 Artemis<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/gallery" class="mobile-nav-link">Gallery</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav>
+    
+
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

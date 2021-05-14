@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <!-- 
+ -->
+  
+  <title>hexo-theme | 怀光的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="hexo搭建博客，主题Next的配置">
+<meta property="og:type" content="article">
+<meta property="og:title" content="hexo-theme">
+<meta property="og:url" content="http://yoursite.com/2019/12/29/hexo-theme-next/index.html">
+<meta property="og:site_name" content="怀光的博客">
+<meta property="og:description" content="hexo搭建博客，主题Next的配置">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2019-12-29T18:00:00.000Z">
+<meta property="article:modified_time" content="2019-12-29T18:00:00.000Z">
+<meta property="article:author" content="Artemis">
+<meta property="article:tag" content="hexo themes">
+<meta name="twitter:card" content="summary">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="怀光的博客" type="application/atom+xml">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">怀光的博客</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/gallery">Gallery</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-hexo-theme-next" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/12/29/hexo-theme-next/" class="article-date">
+  <time datetime="2019-12-29T18:00:00.000Z" itemprop="datePublished">2019-12-29</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/hexo/">hexo</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      hexo-theme
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="利用Hexo搭建博客"><a href="#利用Hexo搭建博客" class="headerlink" title="利用Hexo搭建博客"></a>利用Hexo搭建博客</h1><p>采用Hexo系统，利用markdown语法来编写博客，适合初步搭建博客的开发人员。从github上下载hexo并安装，有自带的主题landscape，就可以搭建起一个简易博客系统。如果期望做的更多一点，博客网站更好一些，那么可以试试替换下主题，也可以接着看下去。本篇主要讲述下主题：<a target="_blank" rel="noopener" href="https://github.com/theme-next/hexo-theme-next.git">Next</a>的配置。</p>
+<h2 id="约定"><a href="#约定" class="headerlink" title="约定"></a>约定</h2><p>在讲述配置时，可能会遇到不同位置的相同文件名的文件(其实主要是 _config.yml). 故约定如下：</p>
+<ol>
+<li>单独的 _config.yml 指根目录下的 _config.yml, 可以配置使用哪种主题</li>
+<li>themes/_config.yml 指主题下的 _config.yml, 是theme主题的配置</li>
+</ol>
+<h2 id="主题配置"><a href="#主题配置" class="headerlink" title="主题配置"></a>主题配置</h2><p>一般的主题基本上按照 theme/_config.yml 下的注释就可以看懂，以及相关的配置，下面讲述下遇到的问题。</p>
+<h3 id="易忽略点"><a href="#易忽略点" class="headerlink" title="易忽略点"></a>易忽略点</h3><p>Question1: 在Schemes配置中，选择主题 scheme: Gemini 时, 左侧边栏中 categories tags 上面没有链接，不可点击<br>回答：默认情况下，posts 标签点开时，网站跳转到 /archives/. 同理, 点击标签 categories, tags时，网站跳转的地址分别是 /categories/, /tags/. 默认情况下，系统中不存在相应的页面，需要按照如下操作处理.</p>
+<ol>
+<li>在 themes/_config.yml 的 menu 下，放开 categories, tags的注释</li>
+<li>按照如下操作，添加 categories, tags 文件夹, 并手动修改其中的index.md<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 在<span class="built_in">source</span>下建立 categories 文件夹, 并创建了一个 index.md</span></span><br><span class="line">node_modules/.bin/hexo new page categories</span><br><span class="line"><span class="meta">#</span><span class="bash"> 修改 categories/index.md, 在生成的 description 后面手动添加 <span class="built_in">type</span>: <span class="string">&quot;categories&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 在<span class="built_in">source</span>下建立 tags 文件夹, 并创建了一个 index.md</span></span><br><span class="line">node_modules/.bin/hexo new page tags</span><br><span class="line"><span class="meta">#</span><span class="bash"> 修改 tags/index.md, 在生成的 description 后面手动添加 <span class="built_in">type</span>: <span class="string">&quot;tags&quot;</span></span></span><br></pre></td></tr></table></figure></li>
+<li>重新启动, npm run clean &amp;&amp; npm run build &amp;&amp; npm run server，左侧边栏中的categories, tags上即附上了链接</li>
+</ol>
+<h2 id="发布"><a href="#发布" class="headerlink" title="发布"></a>发布</h2><blockquote>
+<p>本篇主要讲述在Github上的发布.</p>
+</blockquote>
+<p>在Github上发布有两种思路，一是通过hexo自带的deploy发布，二是通过发布到xxx.github.io设定自动任务发布。<br>第一种方式比较实用，主要有以下几步。</p>
+<ol>
+<li>首先在根目录下安装插件 <code>npm install hexo-deployer-git --save</code>.</li>
+<li>在 _config.yml上配置deployment,示例如下：<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> Deployment</span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment"># Docs: https://hexo.io/docs/one-command-deployment</span></span></span><br><span class="line">deploy:</span><br><span class="line">  - type: git</span><br><span class="line">    repository: git@github.com:xxx/xxx.github.io.git</span><br><span class="line">    branch: master</span><br><span class="line">  - type: git</span><br><span class="line">    repo: https://gitee.com/lxl80/lxl80.git</span><br><span class="line">    branch: master</span><br><span class="line">    ignore_hidden: false</span><br></pre></td></tr></table></figure>
+本质上就是在本地通过cli命令 <code>hexo clean &amp;&amp; hexo build &amp;&amp; hexo deploy</code>, 在本地打包，将生成的public文件夹上传到github上。Github Pages 相当于一个静态资源服务器，上传完成后即可通过 <a target="_blank" rel="noopener" href="https://xxx.github.io/">https://xxx.github.io/</a> 来进行访问. 优势是容易迁移，支持一键发布到多个平台，几乎不存在劣势。</li>
+</ol>
+<p>第二种方式是采用 travis, 在本地完成了编辑后推送到远程触发travis，travis执行设定的任务，自动打包并发布到指定分支, 完成后Github Pages就会自动更新。主要有以下的步骤：</p>
+<ol>
+<li>进入Github的<a target="_blank" rel="noopener" href="https://github.com/settings/tokens">Settings/Developer settings</a>下，注册一个GH_TOKEN.</li>
+<li>使用github账号登录<a target="_blank" rel="noopener" href="https://travis-ci.org/">travis</a>, 待同步项目后，进入相应的项目设置页。</li>
+<li>在项目配置中找到 Environment Variables 中添加GH_TOKEN.</li>
+<li>在本地添加travis的配置文件 .travis.yml, 里面是推送后的自动化任务配置. 示例如下：<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">sudo: false</span><br><span class="line">language: node_js</span><br><span class="line">node_js:</span><br><span class="line">  - 12</span><br><span class="line">cache: npm</span><br><span class="line"><span class="meta">#</span><span class="bash"> 执行分支</span></span><br><span class="line">branches:</span><br><span class="line">  only:</span><br><span class="line">    - master</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 推送后执行的命令</span></span><br><span class="line">script:</span><br><span class="line">  - hexo generate</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 发布</span></span><br><span class="line">deploy:</span><br><span class="line">  provider: pages</span><br><span class="line">  skip-cleanup: true</span><br><span class="line">  github-token: $travis_token</span><br><span class="line">  keep-history: true</span><br><span class="line">  on:</span><br><span class="line">    all_branches: true</span><br><span class="line">    branch: gh-pages</span><br><span class="line">  local-dir: public</span><br></pre></td></tr></table></figure></li>
+<li>在travis-ci.org中执行完毕后, 刷新 xxx.github.io 即可.<br>与第一种方式相比, 主要是节省了本地资源(虽然大多数并不需要). 时间成本上, 虽然一个在本地一个在线上，但是我们自己都是要等待编辑执行，实际上本地可能更快捷一些。</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/12/29/hexo-theme-next/" data-id="ckonygeo7000b1zqc7k3k1o6y" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo-themes/" rel="tag">hexo themes</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2019/12/15/js-closure/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">JS基础-闭包</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/JS-base/">JS base</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo/">hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/interview/">interview</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo-themes/" rel="tag">hexo themes</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/interview-question/" rel="tag">interview question</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js-closure/" rel="tag">js closure</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js-prototype/" rel="tag">js prototype</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js-this/" rel="tag">js this</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/hexo-themes/" style="font-size: 10px;">hexo themes</a> <a href="/tags/interview-question/" style="font-size: 10px;">interview question</a> <a href="/tags/js-closure/" style="font-size: 10px;">js closure</a> <a href="/tags/js-prototype/" style="font-size: 10px;">js prototype</a> <a href="/tags/js-this/" style="font-size: 10px;">js this</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/12/29/hexo-theme-next/">hexo-theme</a>
+          </li>
+        
+          <li>
+            <a href="/2019/12/15/js-closure/">JS基础-闭包</a>
+          </li>
+        
+          <li>
+            <a href="/2019/12/08/js-prototype/">JS基础-原型</a>
+          </li>
+        
+          <li>
+            <a href="/2019/12/01/js-this/">JS基础-this</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/06/interview-frontend/">前端面试题</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2021 Artemis<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/gallery" class="mobile-nav-link">Gallery</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav>
+    
+
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
