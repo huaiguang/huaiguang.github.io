@@ -98,7 +98,7 @@ ignore:
 ## Themes: https://hexo.io/themes/
 ## theme: landscape
 ## theme: indigo 待处理
-theme: next
+theme: landscape
 
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
