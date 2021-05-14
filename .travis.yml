@@ -8,7 +8,7 @@ branches:
     - master
 
 script:
-  - hexo generate
+  - hexo clean && hexo generate
 
 deploy:
   provider: pages
