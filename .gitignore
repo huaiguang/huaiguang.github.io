@@ -1,8 +1,11 @@
 .DS_Store
 Thumbs.db
-db.json
 *.log
 .deploy*/
 
+# npm packages
 node_modules/
+
+# public resource
 public/
+db.json
